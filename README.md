@@ -10,4 +10,5 @@
 - [데이터활용](https://github.com/jngcii/TIL/blob/master/Java/데이터%20활용.md)
 - [제어문](https://github.com/jngcii/TIL/blob/master/Java/제어문.md)
 - [배열](https://github.com/jngcii/TIL/blob/master/Java/배열.md)
-- [객체지향](https://github.com/jngcii/TIL/blob/master/Java/객체지향.md)
+- [객체지향 I](https://github.com/jngcii/TIL/blob/master/Java/객체지향.md)
+- [객체지향 II](https://github.com/jngcii/TIL/blob/master/Java/객체지향2.md)
