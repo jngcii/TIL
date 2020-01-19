@@ -12,3 +12,4 @@
 - [배열](https://github.com/jngcii/TIL/blob/master/Java/배열.md)
 - [객체지향 I](https://github.com/jngcii/TIL/blob/master/Java/객체지향.md)
 - [객체지향 II](https://github.com/jngcii/TIL/blob/master/Java/객체지향2.md)
+- [상속과 인터페이스](https://github.com/jngcii/TIL/blob/master/Java/상속과%20인터페이스.md)
