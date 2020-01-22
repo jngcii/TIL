@@ -147,3 +147,139 @@
             }
             ```
             >실행 결과 : MyObject
+
+    4. 같은지 비교하는 메서드
+
+        `public boolean equals(Object obj)`
+
+        - equals()메서드는 인자로 전달된 객체와 현재 객체가 같은지 판단한다.
+
+        - 어떤 클래스로부터 만들었는지가 아닌, **해시코드를 비교한다.**
+
+<br />
+
+#### (2) String 클래스
+
+- 문자열 처리를 돕는 API
+
+- 문자열을 생성하는 방법 : 2가지
+
+    ```java
+    String s1 = new String("java");
+    String s2 = "java";
+    String s3 = new String("java");
+    String s4 = "java";
+    ```
+    >new 연산자를 사용해 만든 String 객체는 모두 다른 힙 메모리에 저장된다.
+    >
+    >반면, `""`로 생성된 String 객체는 모두 같은 인스턴스이다.
+
+    ![](assets/string_memory.jpg)
+
+    1. 문자열 비교 메서드
+
+        `boolean equals(Object anObject)`
+
+        `boolean equalsIgnoreCase(String anotherString)`
+
+        - String 클래스는 Object로부터 상속받은 equals()메서드를 오버라이딩 했다.
+
+        - String의 equals()메서드는 String 인스턴스의 문자열을 비교하여 같으면 true, 다르면 false를 반환한다.
+
+        - equalsIgnoreCase() 메서드는 대소문자를 상관하지 않는다.
+
+    2. 문자열 출력 메서드
+
+        `String toString()`
+
+        - 역시 Object로부터 toString() 메서드를 오버라이딩 했다.
+
+        - 참조변수를 출력할 때는 자동으로 toString() 메서드가 호출된다.
+
+    3. 문자열 정보 반환 메서드
+
+        `int length()`
+
+        `char charAt(int index)`
+
+        - length()메서드는 문자열의 전체 길이를, charAt() 메서드는 인자값을 전달받은 인덱스의 문자를 반환
+
+    4. 문자열 공백 관련 메서드
+
+        `String trim()`
+
+        `boolean isEmpty()`
+
+        - trim()메서드는 문자열 양 끝에 있는 공백을 제거
+
+        - isEmpty() 메서드는 문자열의 길이가 0인지 판단
+
+    5. 문자열 검색 메서드
+
+        ```java
+        int indexOf(int ch)
+        int indexOf(int ch, int fromIndex)
+        int indexOf(String str)
+        int indexOf(String str, int fromIndex)
+        int lastIndexOf(int ch)
+        // ...
+        ```
+
+        - indexOf()는 인자로 지정된 문자 또는 문자열이 시작되는 인덱스를 문자열의 처음부터 검색
+
+        - lastIndexOf()는 인자로 지정된 문자 또는 문자열이 시작되는 인덱스를 문자열의 끝부터 검색
+
+        - 만약 검색한 문자열이 없으면 `-1` 반환
+
+        ```java
+        boolean startsWith(String prefix)
+        boolean startsWith(String prefix, int toffset)
+        boolean endsWith(String suffix)
+        ```
+
+        - startsWith()는 인자로 전달받은 문자열이 대상 문자열의 시작부분에 포함되었는지를 판단한다.
+        
+        - endsWith()는 인자로 전달받은 문자열이 대상 문자열의 끝부분에 포함되었는지를 판단한다.
+
+    6. 문자열 편집 메서드
+        
+        ```java
+        Strint concat(String str)
+        String replace(char oldChar, char newChar)
+        String replaceAll(String regex, String replacement)
+        String replaceFirst(String regex, String replacement)
+        String toLowerCase()
+        String toUpperCase()
+        ```
+
+        - concat() : 새로운 문자열 추가
+        - replace() : 기존 문자열 변경
+        - toLowerCase() : 소문자로
+        - toUpperCase() : 대문자로
+
+    7. 문자열 추출 메서드
+
+        ```java
+        String[] split(String regex)
+        String[] split(String regex, int limit)
+        String substring(int beginIndex)
+        String substring(int beginIndex, int endIndex)
+        ```
+
+        - split()의 regex : 문자열을 구분할 구분자
+        
+        - 구분자로 문자열을 잘라서 배열로 반환
+
+        - substring() : 문자열 슬라이싱
+
+        - beginIndex부터 잘라서 endIndex-1까지 자름 (파이썬 슬라이싱 인덱스와 같음)
+
+        - 두번째 인자가 없다면 끝까지 자름
+
+    8. 문자열로 변환하는 메서드
+
+        `static String valueOf(뭐든 다)`
+
+        - 어떤 데이터 타입이던지 들어온 그대로를 문자열로 바꿔서 리턴한다.
+
+        - `static` 으로 선언되어 있어서 `String.valueOf()`로 사용할수 있다.
