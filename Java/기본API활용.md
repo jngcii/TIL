@@ -283,3 +283,44 @@
         - 어떤 데이터 타입이던지 들어온 그대로를 문자열로 바꿔서 리턴한다.
 
         - `static` 으로 선언되어 있어서 `String.valueOf()`로 사용할수 있다.
+
+<br />
+
+#### (3) StringBuffer/StringBuilder 클래스
+
+- String처럼 문자열을 처리하는 클래스
+
+- String 클래스는 원본이 변경되지 않고 수정할때마다 메모리에 새로운 문자열이 생성되어 자리를 차지한다.
+
+- StringBuffer/Stringbuilder 클래스는 처음 만들 때 넉넉한 메모리 공간을 확보해 그 안에서 문자열을 저장하고 수정한다.
+
+- StringBuffer는 동시접근하는 상황에 유리하고 그 외에는 StringBuilder가 더 효율적이다.
+
+- 생성 방법
+
+    ```java
+    StringBuilder()             // 처음 크기가 16인 StringBuilder 생성
+    StringBuilder(int capacity) // 지정된 크기의 StringBuilder 생성
+    StringBuilder(String str)   // 지정된 문자열을 가진 StringBuilder 생성
+    ```
+- 주요 메서드
+
+| 제어자 및 타입 | 메서드 | 설명 |
+| --- | --- | --- |
+|StringBuilder | append(*) | 매개변수로 전달받는 값을 추가 |
+|int | capacity() | 현재 크기 반환 |
+|char | charAt(int) | 매개변수로 전잘받는 인덱스의 문자 반환 |
+|StringBuilder | delete(int, int) | 매개변수로 전잘받는 인덱스 사이의 문자열 삭제 |
+|StringBuilder | deleteCharAt(int) | 매개변수로 전잘받은 인덱스의 문자 삭제 |
+|int | indexOf(*) | 매개변수로 전달받은 문자열의 시작 인덱스 반환 |
+|StringBuilder | insert(int, *) | 첫 번째 매개변수로 전달받은 위치 다음에 두번째 매개변수 삽입 |
+|int | lastIndexOf(*) | 매개변수로 전달받은 문자열을 뒤에서부터 검색하여 시작인덱스 반환 |
+|int | length() | 문자열 전체 길이 반환 |
+|StringBuilder | replace(int, int, String) | 매개변수로 전달받은 범위를 세번째 매개변수의 문자열로 대체 |
+|StringBuilder | reverse() | 문자열을 거꾸로 뒤집기 |
+|void | setCharAt(int, char) | 특정 위치에 문자 삽입 |
+| void | setLength(int) | 문자열의 길이를 새로 지정 |
+| String | substring(int) | 매개변수로 전달받은 위치부터 문자열 추출 |
+| String | substring(int, int) | 문자열 일부 추출 |
+| String | toString() | 문자열 반환 |
+| void | trimToSize() | StringBuilder의 크기를 저장된 문자 수에 맞춤 |
