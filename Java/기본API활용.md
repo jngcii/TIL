@@ -324,3 +324,210 @@
 | String | substring(int, int) | 문자열 일부 추출 |
 | String | toString() | 문자열 반환 |
 | void | trimToSize() | StringBuilder의 크기를 저장된 문자 수에 맞춤 |
+
+
+#### (4) Math 클래스
+
+- 수학적인 계산을 위한 클래스
+
+- Math 클래스의 필드, 메서드 모두 static으로 선언되어서 `Math.변수` 및 `Math.메서드()` 형태로 사용한다.
+
+- 생성자가 private로 선언되어서 인스턴스를 생성할 수 없다.
+
+- 필드
+
+    1. `Math.E` : 자연로그 (2.71828...) double 반환
+    2. `Math.PI` : 원주율 (3.141592...) double 반환
+
+- 메서드
+
+    1. `Math.abs(-12)` : 절대값
+    2. `Math.ceil(12.5)` : 올림, double 반환
+    3. `Math.floor(12.5)` : 버림, double 반환
+    4. `Math.round(12.5)` : 반올림
+    5. `Math.max(5,8)` : 최대값
+    6. `Math.pow(double a, double b)` : a의 b승, double 반환
+    7. `Math.sqrt(double a)` : a의 제곱근, double 반환
+    8. `Math.random()` : 0.0 ~ 1.0미만 난수 구함, double 반환
+
+
+#### (5) Wrapper 클래스
+> Boolean, Byte, Charactor, Double, Float, Integer, Long, Short 클래스
+
+- 박싱과 언박싱
+
+    기본 데이터는 값 자체만 저장되어 있으므로 데이터에 대해 처리할 대 메서드를 사용할 수 없다.
+
+    따라서 데이터에 대한 처리 기능이 필요하거나, 반대로 연산을 해야 할때 Wrapper 클래스로 생성하거나 다시 기본 데이터로 되돌리는 박싱/언박싱이 필요하다.
+
+    - 박싱
+    
+        ```java
+        Boolean obj1 = Boolean.valueOf(true);
+        Integer obj2 = Integer.valueOf(12);
+        // ... 이런식으로 하면 된다.
+        ```
+    - 언박싱
+
+        ```java
+        boolean bool = obj1.booleanValue();
+        int d = obj2.intValue();
+        // ... 이런식으로 하면 된다.
+        ```
+
+- 오토박싱
+
+    >JDK 1.5 부터 이러한 박싱/언박싱을 자동으로 처리해준다.
+
+    ```java
+    int n1 = 10;
+    Integer obj1 = n1;
+
+    Integer obj2 = 30
+    n2 = obj2 + 40;
+    // 이와 같이 가능해졌다.
+    ```
+
+- 문자열 변환
+
+    >Wrapper 클래스는 문자열 타입의 데이터를 기본 데이터 타입으로 변환하는 메서드를 제공한다.
+    >
+    >모든 메서드는 static으로 선언되어 있다.
+
+    ```java
+    boolean bool = Boolean.parseBoolean("true");
+    int d = Integer.parseInt("123");
+    double dd = Double.parseDouble("3.14");
+    float f = Float.parseFloat("10.5f");
+    // 이와 같이 한다.
+    ```
+
+<br />
+
+
+### III. 유틸리티 API
+
+#### (1) StringTokensize 클래스
+
+```java
+String Tokenizer(String str)                //전달받은 문자열을 공백을 기준으로 분리
+String Tokenizer(String str, String delim)  //전달받은 구분자를 이용하여 분리
+```
+
+- String의 `split()`메서드처럼 문자열을 분리하는 기능이 있는 클래스
+
+- String의 `split()`메서드는 `String[]` 배열로 분리된 문자열을 반환하지만,  StringTokenizer 클래스는 자체적으로 분리된 문자열을 처리한다.
+
+- 분리된 문자열 : token
+
+- 사용 예
+
+    ```java
+    String msg = "Hi, my name is jngcii!"
+
+    StringTokenizer st1 = new StringTokenizer(msg);
+    int cnt = st1.countTokens(); // 단어수 반환
+
+
+
+    String s = "id=guest&name=jngcii&pwd=1004";
+    StringTokenizer st2 = new StringTokenizer(msg, "&");
+    while(st2.hasMoreTokens()) {                // 커서 다음에 토큰이 있는지 판단
+        System.out.println(st2.nextToken());    // 다음 토큰을 출력하고 커서는 그 다음으로 이동
+    }
+    ```
+
+#### (2) Random 클래스
+
+- 난수에 관한 기능을 처리하는 API
+
+- `Random r = new Random();` 과 같이 인스턴스를 만들어 사용
+
+- 메서드
+
+    1. nextBoolean() : `true` 또는 `false` 반환
+    2. nextDouble() : 0.0~1.0미만의 난수 반환
+    3. nextInt() : int 범위의 난수 반환
+    4. nextInt(int bound) : 0~bound미만의 난수 반환
+
+
+#### (3) Arrays 클래스
+
+- 배열에 관한 여러가지 기능 제공
+
+- 모든 메서드 static으로 선언
+
+- 메서드
+
+    ```java
+    int[] score = {80, 72, 95, 100, 50};
+    // 배열에서 해당 점수 찾아 index 반환
+    int a1 = Arrays.binarySearch(score, 100);
+    
+    // score 배열을 0번지부터 score.length만큼 복사
+    int[] score2 = Arrays.copyOf(score, score.length);
+
+    // score 배열을 3번지부터 5번지 전까지 복사
+    int [] score3 = Arrays.copyOfRange(score, 3, 5);
+
+    // 새로 만든 배열에 score 배열을 복사
+    // java.lang 패키지의 System 클래스에 static으로 선언된 메서드 사용
+    int[] score4 = new int[score.length];
+    System.arraycopy(score, 0, score4, score.length);
+
+    // 정렬
+    Arrays.sort(score);
+
+    // 배열처럼 생긴 String 리턴
+    // e.g. [80, 72, 95, 100, 50]
+    Arrays.toString(score);
+    ```
+
+
+#### (4) Date 클래스
+
+    ```java
+    Date d = new Date();
+
+    String s = d.toString();
+    ```
+
+
+#### (5) Calendar 클래스
+
+- 날짜와 시간 정보를 설정하여 사용할 수 있는 API
+
+- 기본적인 날짜와 시간 정보는 설정해서 사용하도록 추상 클래스로 선언되어 있다.
+
+- 추상클래스라서 new 명령문으로 생성하지 못하구 getInstance `static`메서드를 사용해야 한다.
+
+    ```java
+    Calendar c = Calendar.getInstance();
+    ```
+
+- Calendar 객체가 생성된 후에는 날짜와 시간을 자세하게 다룰 수 있는데, 모두 static final로 선언되어 있어 값을 수정할 수 없다.
+
+    ```java
+    c.get(Calendar.YEAR);
+    c.get(Calendar.MONTH)+1;
+    c.get(Calendar.DAY_OF_MONTH);
+    c.get(Calendar.HOUR);
+    c.get(Calendar.MINUTE);
+    ```
+
+- 생성된 Calendar의 날짜와 시간 정보를 설정하는 방법
+
+    ```java
+    void set(int field, int value)
+    void set(int year, int month, int date)
+    void set(int year, int month, int date, int hourOfDay, int minute)
+    ```
+    ```java
+    Calendar c = Calendar.getInstance();
+    c.clear();
+    c.set(2020, 3, 19);
+
+    int year = c.get(Calendar.YEAR);
+    int month = c.get(Calendar.MONTH);
+    int day = c.get(Calendar.DAY_OF_MONTH);
+    ```
