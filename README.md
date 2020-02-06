@@ -55,4 +55,4 @@
 - [TCP/IP의 계층적 구조](https://github.com/jngcii/TIL/blob/master/TCP-IP/07_section_of_TCP_IP.md)
 - [TCP/IP방식의 응용 계층](https://github.com/jngcii/TIL/blob/master/TCP-IP/08_App_section_of_TCP_IP.md)
 - [TCP/IP방식의 전송 계층](https://github.com/jngcii/TIL/blob/master/TCP-IP/09_transfer_section_of_TCP_IP.md)
-- - [TCP/IP방식의 네트워크 계층](https://github.com/jngcii/TIL/blob/master/TCP-IP/10_network_section_of_TCP_IP.md)
+- [TCP/IP방식의 네트워크 계층](https://github.com/jngcii/TIL/blob/master/TCP-IP/10_network_section_of_TCP_IP.md)
