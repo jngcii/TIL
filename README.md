@@ -47,6 +47,10 @@
 
 - [Introduction](./OS/01_introduction.md)
 
+### Linux
+
+- [Program Installation](./Linux/##_instrallation.md)
+
 <br />
 
 ## Network
