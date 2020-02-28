@@ -48,8 +48,11 @@
 - [Introduction](./OS/01_introduction.md)
 - [System Structure & Program Execution 1](./OS/02_system_structure_&_program_execution_1.md)
 - [System Structure & Program Execution 2](./OS/03_system_structure_&_program_execution_2.md)
-- [Process 1](./OS/04_process_1.md.md)
-- [Process 2](./OS/05_process_2.md.md)
+- [Process 1](./OS/04_process_1.md)
+- [Process 2](./OS/05_process_2.md)
+- [Process Management](./OS/06_Process_management.md)
+- [CPU Scheduling](./OS/07_CPU_scheduling.md)
+
 
 ### Linux
 
