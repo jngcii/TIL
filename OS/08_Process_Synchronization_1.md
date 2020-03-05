@@ -13,6 +13,7 @@
 - 멀티스레딩 환경에서도 일어날 수 있다.
 
 ### II. OS에서 race condition은 언제 발생하는가?
+>일반적으로 공유데이터라는게 사용자프로세스에는 없지만, 운영체제에서는 공유데이터가 존재하고 이걸 동시에 접근할 때 문제가 생긴다.
 1. kernel 수행 중 인터럽트 발생 시
 2. Process가 System call을 하여 kernel mode로 수행 중인데 context switch가 일어나는 경우
 ![](assets/osrc2.jpeg)
