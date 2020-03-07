@@ -36,8 +36,23 @@
 
 ### Basic
 
-- [LIS(Longest Increasing Subsequence)](./Algorithm/Basic/LIS.py)
-- [LCS(Longest Common Subsequence)](./Algorithm/Basic/LCS.py)
+- [Sorting](./Algorithm/Basic/Sorting)
+- [Practice](./Algorithm/Basic/Practice)
+
+### Advanced
+
+- Graph
+  - [BFS](Algorithm/Advanced/Graph/BFS)
+  - [DAG](Algorithm/Advanced/Graph/DAG)
+  - [MST](Algorithm/Advanced/Graph/MST)
+  - [Bellman-Ford](Algorithm/Advanced/Graph/Bellman-Ford)
+  - [Dijkstra](Algorithm/Advanced/Graph/Dijkstra)
+  - [Floyd](Algorithm/Advanced/Graph/Floyd)
+  - [Practice](Algorithm/Advanced/Graph/Practice)
+- Tree
+  - [LCA](Algorithm/Advanced/Tree/LCA)
+  - [Fenwick Tree](Algorithm/Advanced/Tree/Fenwick_Tree)
+  - [Segment Tree](Algorithm/Advanced/Tree/Segment_Tree)
 
 <br />
 
@@ -52,6 +67,10 @@
 - [Process 2](./OS/05_process_2.md)
 - [Process Management](./OS/06_Process_management.md)
 - [CPU Scheduling](./OS/07_CPU_scheduling.md)
+- [Process Synchronization 1](./OS/08_Process_Synchronization_1.md)
+- [Process Synchronization 2](./OS/09_Process_Synchronization_2.md)
+- [Deadlock](./OS/10_Deadlock.md)
+- [Memory management 1](./OS/11_Memory_management_1.md)
 
 
 ### Linux
