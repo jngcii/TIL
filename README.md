@@ -70,7 +70,8 @@
 - [Process Synchronization 1](./OS/08_Process_Synchronization_1.md)
 - [Process Synchronization 2](./OS/09_Process_Synchronization_2.md)
 - [Deadlock](./OS/10_Deadlock.md)
-- [Memory management 1](./OS/11_Memory_management_1.md)
+- [Memory management](./OS/11_Memory_management.md)
+- [Paging](OS/12_Paging.md)
 
 
 ### Linux

@@ -1,4 +1,4 @@
-# Memory Management 1
+# Memory Management
 
 ##### 2020.03.07
 
