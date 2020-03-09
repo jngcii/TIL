@@ -96,7 +96,8 @@
 - page table이 매우 큰 이유
   - 모든 프로세스 별로 그 logical address에 해당하는 모든 page에 대해 page table entry가 존재
   - 대응하는 page가 메모리에 있든 아니든 간에 page table에는 entry로 존재
-- Inverted page table
+- **Inverted page table**
+  - 시스템안에 페이지 테이블이 딱 하나 존재한다. (각 프로세스마다 존재 x)
   - page frame 하나당 page table에 하나의 entry를 둔 것 (system-wide)
   - 각 page table entry는 각각의 물리적 메모리의 page frame이 담고 있는 내용 표시 (process-id, process의 logical address)
   - 단점 : 테이블 전체를 탐색해야함

@@ -22,6 +22,7 @@
 
 ### II. 주소 바인딩 (Address Binding)
 
+- ***주소변환은 운영체제가 하는것이 아니다!!!!! 하드웨어가 하는것이다!!!!!!***
 - 프로그램이 물리적인 메모리 어디에 올라갈지 결정하는 것
 - Symbolic Address -> Logical Address -> Physical Address
 - 프로그래머는 변수나 함수명 등 메모리를 사용하는 방법 : Symbolic Address

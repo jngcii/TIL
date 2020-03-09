@@ -72,6 +72,7 @@
 - [Deadlock](./OS/10_Deadlock.md)
 - [Memory management](./OS/11_Memory_management.md)
 - [Paging](OS/12_Paging.md)
+- [Segmentation](OS/13_Segmentation.md)
 
 
 ### Linux
