@@ -53,6 +53,8 @@
   - [LCA](Algorithm/Advanced/Tree/LCA)
   - [Fenwick Tree](Algorithm/Advanced/Tree/Fenwick_Tree)
   - [Segment Tree](Algorithm/Advanced/Tree/Segment_Tree)
+- DP
+  - [Practice](Algorithm/Advanced/DP)
 
 
 <br />
@@ -91,6 +93,8 @@
 - [Segmentation](OS/13_Segmentation.md)
 - [Virtual Memory 1](OS/14_Virtual_memory_1.md)
 - [Virtual Memory 2](OS/15_Virtual_memory_2.md)
+- [File System](OS/16_File_system.md)
+- [File System Implementation](OS/17_File_system_implementaion.md)
 
 
 ### Linux
