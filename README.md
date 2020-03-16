@@ -99,7 +99,7 @@
 ### Ubuntu
 
 - [Installation](Ubuntu/00_installation.md)
-- [Basic](Ubuntu/01_concept.md)
+- [Basic](Ubuntu/01_basic.md)
 - [RAID](Ubuntu/02_raid.md)
 
 ### Linux
