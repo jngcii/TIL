@@ -96,6 +96,11 @@
 - [File System](OS/16_File_system.md)
 - [File System Implementation](OS/17_File_system_implementaion.md)
 
+### Ubuntu
+
+- [Installation](Ubuntu/00_installation.md)
+- [Basic](Ubuntu/01_concept.md)
+- [RAID](Ubuntu/02_raid.md)
 
 ### Linux
 
