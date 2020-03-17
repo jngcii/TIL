@@ -99,7 +99,6 @@ gpasswd # 그룹 관리
 |---|---|---|
 |rwx|rwx|rwx|
 |421|421|421|
-\
 - 허가권 변경 `chmod 000~777 파일명`
 - 파일 소유권 `chown ubuntu test` : test파일의 소유권을 ubuntu로 변경
 - 파일 그룹 `chgrp ubuntu test` : test파일 그룹을 ubuntu로 변경
