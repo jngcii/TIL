@@ -101,6 +101,9 @@
 - [Installation](Ubuntu/00_installation.md)
 - [Basic](Ubuntu/01_basic.md)
 - [RAID](Ubuntu/02_raid.md)
+- [Quota](Ubuntu/03_quota.md)
+- [Shell Script Programming](Ubuntu/04_shell_scripting.md)
+- [Remote System Management](Ubuntu/05_remote_system_management.md)
 
 ### Linux
 
