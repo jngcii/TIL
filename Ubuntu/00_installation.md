@@ -14,7 +14,7 @@
        3. vi 에디터 방향키 오류
           1. cd ~
           2. vi .exrc
-            ```shell
+            ```vim
             set autoindent
             set bs=2
             set nocp
@@ -74,54 +74,52 @@
 
 1. root 계정 활성화
    ```shell
-   # root로 로그인
-   sudo su - root
-   # root password 변경
-   passwd
-   # 비밀번호 두번 입력
+   # # root로 로그인
+   # sudo su - root
+   # # root password 변경
+   # passwd
+   # # 비밀번호 두번 입력
    ```
 2. apt 저장소 지정
    ```shell
-   cd /etc/apt
-   # 기존 sources.list 백업 파일로 변경
-   mv sources.list sources.list.bak
-   # 새로운 list 가져오기
-   wget http://download.hanbit.co.kr/ubuntu/16.04/sources.list
-   # 적용
-   apt-get update
+   # cd /etc/apt
+   # # 기존 sources.list 백업 파일로 변경
+   # mv sources.list sources.list.bak
+   # # 새로운 list 가져오기
+   # wget http://download.hanbit.co.kr/ubuntu/16.04/sources.list
+   # # 적용
+   # apt-get update
    ```
 3. IP 주소 설정
    ```shell
-   cd /etc/network
-   sudo vi interfaces
-   ```
-   ```vi
-   <!-- primary network interface -->
-   # ens32은 ifconfig로 확인
-   auto ens32
-   iface ens32 inet static
-   address 192.168.111.100
-   netmask 255.255.255.0
-   broadcast 192.168.111.255
-   gateway 192.168.111.2
+   # cd /etc/network
+   # sudo vi interfaces
+   # #primary network interface
+   ## # ens32은 ifconfig로 확인
+   ## auto ens32
+   ## iface ens32 inet static
+   ## address 192.168.111.100
+   ## netmask 255.255.255.0
+   ## broadcast 192.168.111.255
+   ## gateway 192.168.111.2
 
-   dns-nameservers 192.168.111.2
-   ```
-   ```shell
-   systemctl restart networking.service
-   # 위에거 안되면
-   roboot
+   ## dns-nameservers 192.168.111.2
+   
+   # systemctl restart networking.service
+   # # 위에거 안되면
+   # roboot
    ```
 4. 기타 설정
    ```shell
-   # vim 설치
-   apt-get -y install vim
-   # network 확인
-   ifconfig ens32
-   # 방화벽 화성화
-   ufw enable
-   # 종료
-   halt -p
+   # # vim 설치
+   # apt-get -y install vim
+   # # network 확인
+   # ifconfig ens32
+   # # 방화벽 화성화
+   # ufw enable
+   # # 종료
+   # halt -p
+   ```
 
 ### 5. 마무리
 1. cd 제거

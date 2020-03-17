@@ -6,17 +6,17 @@
 
 ### 시스템 종료
 ```shell
-poweroff
-shutdown -P now
-halt -p
-init 0
+$ poweroff
+$ shutdown -P now
+$ halt -p
+$ init 0
 ```
 
 ### rebooting
 ```shell
-reboot
-shutdown -r now
-init 6
+$ reboot
+$ shutdown -r now
+$ init 6
 ```
 
 ## 가상 콘솔
@@ -24,16 +24,16 @@ init 6
 - 변경방법 : `ctrl` + `option` + `fn` + (`f1` ~ `f7`)
 - run level 변경 방법
   ```shell
-  # default.target에 연결된 파일 찾기
-  ls -l /lib/systemd/system/default.target
+  ##default.target에 연결된 파일 찾기
+  # ls -l /lib/systemd/system/default.target
 
-  # multi-user를 default로 link 걸기
-  ln -sf /lib/systemd/system/multi-user.target /lib/systemd/system/default.target
+  ##multi-user를 default로 link 걸기
+  # ln -sf /lib/systemd/system/multi-user.target /lib/systemd/system/default.target
 
-  # graphical을 default로 link 걸기
-  ln -sf /lib/systemd/system/graphical.target /lib/systemd/system/default.target
+  ##graphical을 default로 link 걸기
+  # ln -sf /lib/systemd/system/graphical.target /lib/systemd/system/default.target
 
-  # reboot하면 처음부터 설정된 것으로 들어가진다.
+  ##reboot하면 처음부터 설정된 것으로 들어가진다.
   ```
 
 ## vi editor
@@ -59,39 +59,52 @@ init 6
   (/dev/cdrom은 /dev/sr0에 링크된 이름)
 - usb마운트 하는 법
     ```shell
-    # 연결된 장치 확인
-    ls /dev/sd*
-    # media 디렉터리 하위에 마운트할 dir 생성
-    mkdir /media/usb
-    # 마운트
-    mount /dev/sd1 /media/usb
+    ##연결된 장치 확인
+    # ls /dev/sd*
+    ##media 디렉터리 하위에 마운트할 dir 생성
+    # mkdir /media/usb
+    ##마운트
+    # mount /dev/sd1 /media/usb
     ```
 
 ## 리눅스 기본 명령어
 ```shell
-pwd # 현재 위치 출력
-cp /abc/old.txt /bcd/new.txt # abc의 old.txt 파일을 bcd에 new.txt로 복사
-touch abc.txt # abc.txt라는 크기가 0인 새 파일 생성. 이미 존재하면 최종 수정 시간 변경
-mv # 파일 or 디렉터리 이동
-rmdir # 해당 디렉터리 삭제
-head, tail : 앞, 뒤 10행 출력
+##현재 위치 출력
+pwd
+##abc의 old.txt 파일을 bcd에 new.
+# cp /abc/old.txt /bcd/new.txt txt로 복사
+##abc.txt라는 크기가 0인 새 파일 생성. 이미 존재하면  touch abc.txt최종 수정 시간 변경
+##파일 or 디렉터리 이동
+# mv
+##해당 디렉터리 삭제
+# rmdir
+##앞, 뒤 10행 출력
+# head, tail
 ```
 
 ## 사용자와 그룹
 ```shell
-cat /etc/passwd #사용자 보기
-cat /etc/group #그룹 보기
+# cat /etc/passwd #사용자 보기
+# cat /etc/group #그룹 보기
 
-# 사용자 추가  --유저 아이디 --그룹 아이디 --홈디렉터리 --기본 쉘
-adduser --uid --gid --home /newhome --shell /bin/csh
-passwd # 비번변경
-usermod --shell /bin/csh --groups ubuntu newuser1 # 사용자 속성 변경
-userdel # 사용자 삭제
-groups # 사용자 소속 그룹 출력
-groupadd <group명> # 새 그룹 생성
-groupmod # 그룹 모드 변경
-groupdel # 그룹 삭제
-gpasswd # 그룹 관리
+## 사용자 추가  --유저 아이디 --그룹 아이디 --홈디렉터리 --기본 쉘
+# adduser --uid --gid --home /newhome --shell /bin/csh
+## 비번변경
+# passwd 
+## 사용자 속성 변경
+# usermod --shell /bin/csh --groups ubuntu newuser1 
+## 사용자 삭제
+# userdel 
+## 사용자 소속 그룹 출력
+# groups 
+## 새 그룹 생성
+# groupadd <group명> 
+## 그룹 모드 변경
+# groupmod 
+## 그룹 삭제
+# groupdel
+## 그룹 관리 
+# gpasswd 
 ```
 
 ## 파일 허가권
@@ -119,17 +132,17 @@ gpasswd # 그룹 관리
 
 ### apt-get
 ```shell
-apt-get -y install <패키지 이름> # 설치
-apt-get update # 목록 업데이터
-apt-get remove <패키지 이름> # 패키지만 삭제
-apt-get purge <패키지 이름> # 의존성 패키지까지 모두 삭제
-apt-get autoremove # 사용하지 않는 패키지 자동 삭제
-apt-get clean <패키지 이름> # 과적 파일까지 삭제
-apt-get autoclean # 사용하지 않는 패키지 과거 파일까지 모두 삭제
+# apt-get -y install <패키지 이름> # 설치
+# apt-get update # 목록 업데이터
+# apt-get remove <패키지 이름> # 패키지만 삭제
+# apt-get purge <패키지 이름> # 의존성 패키지까지 모두 삭제
+# apt-get autoremove # 사용하지 않는 패키지 자동 삭제
+# apt-get clean <패키지 이름> # 과적 파일까지 삭제
+# apt-get autoclean # 사용하지 않는 패키지 과거 파일까지 모두 삭제
 
-apt-cache show <패키지 이름> # 패키지 정보 출력
-apt-cache depends <패키지 이름> # 의존성 정보 출력
-apt-cache rdepends <패키지 이름> # 역의존성 정보 출력
+# apt-cache show <패키지 이름> # 패키지 정보 출력
+# apt-cache depends <패키지 이름> # 의존성 정보 출력
+# apt-cache rdepends <패키지 이름> # 역의존성 정보 출력
 ```
 
 ## 파일 압축 및 묶기
@@ -138,10 +151,10 @@ apt-cache rdepends <패키지 이름> # 역의존성 정보 출력
 - xz, bzip2, gzip, zip이 있다.
 - xz 사용법
   ```shell
-  xz <파일이름> # 파일이름.xz로 압축, 기존파일 삭제
-  xz -k <파일이름> # 파일이름.xz로 압축, 기존파일 유지
-  xz -d <파일이름.xz> # 압축풀기
-  xz -l <파일이름.xz> # 압축 파일 속 파일 목록, 압축률 출력
+  # xz <파일이름> # 파일이름.xz로 압축, 기존파일 삭제
+  # xz -k <파일이름> # 파일이름.xz로 압축, 기존파일 유지
+  # xz -d <파일이름.xz> # 압축풀기
+  # xz -l <파일이름.xz> # 압축 파일 속 파일 목록, 압축률 출력
   ```
 
 ### 묶기 (tar)
@@ -156,9 +169,9 @@ apt-cache rdepends <패키지 이름> # 역의존성 정보 출력
 - j : tar + bzip2
 - z : tar + gzip
   ```shell
-  tar cvf my.tar /etc/systemd/      # /etc/systemd/를 과정을 보여주면서 my.tar 이름으로 묶기
-  tar cvfJ my.tar.xz /etc/systemd/  # /etc/systemd/를 과정 보여주면서 xz로 압축하면서 my.tar.xz로 묶기
-  tar xvfj my.tar.bz2               # C를 지정하지 않았으므로, 묶을때의 directory로 my.tar.bz2 압축 및 묶음 풀기
+  # tar cvf my.tar /etc/systemd/      # /etc/systemd/를 과정을 보여주면서 my.tar 이름으로 묶기
+  # tar cvfJ my.tar.xz /etc/systemd/  # /etc/systemd/를 과정 보여주면서 xz로 압축하면서 my.tar.xz로 묶기
+  # tar xvfj my.tar.bz2               # C를 지정하지 않았으므로, 묶을때의 directory로 my.tar.bz2 압축 및 묶음 풀기
   ```
 
 ### 파일 찾기
@@ -170,42 +183,34 @@ apt-cache rdepends <패키지 이름> # 역의존성 정보 출력
 
 ### 사용법
 ```shell
-systemctl status cron
-vim /etc/crontab 
-# 아래 입력
-```
-```vim
-PATH = /usr/~~~ #이거 아래 모두 삭제
-#한줄 띄고
-01 03 15 * * root /root/myBackup.sh
-# 분 시 일 월 요일 사용자 실행파일
-# 매요일 매월 15일 3시 15분에 root권한으로 /root/myBackup.sh 실행해라!
-```
-```shell
-#my backup 만들기
-touch myBackup.sh
-chmod 755 myBackup.sh
-ls -s myBackup.sh
-vim myBackup.sh
-```
-```vim
-#! /bin/sh
-set $(date)
-fname="backup - $1$2$3tar.xz"
-tar cfJ /backup/$fname /home
-```
-```shell
-mkdir /backup
-systemctl restart cron
+# systemctl status cron
+# vim /etc/crontab 
+## 아래 입력
+## PATH = /usr/~~~  # 이거 아래 모두 삭제
+## 한줄 띄고
+## 01 03 15 * * root /root/myBackup.sh
+## 분 시 일 월 요일 사용자 실행파일
+## 매요일 매월 15일 3시 15분에 root권한으로 /root/myBackup.sh 실행해라!
+## my backup 만들기
+# touch myBackup.sh
+# chmod 755 myBackup.sh
+# ls -s myBackup.sh
+# vim myBackup.sh
+# #! /bin/sh
+## set $(date)
+## fname="backup - $1$2$3tar.xz"
+## tar cfJ /backup/$fname /home
+# mkdir /backup
+# systemctl restart cron
 ```
 
 ## 네트워크 관련 명령어
 ```shell
-nm-connection-editor
-nmtui
-systemctl [start/stop/restart/status] networking
-ifconfig
-nslookup
+# nm-connection-editor
+# nmtui
+# systemctl [start/stop/restart/status] networking
+# ifconfig
+# nslookup
 ```
 - `/etc/resolv.conf` : 임시로 사용되는 파일로 dns 정보와 호스트 이름이 있다. (dns 서버 정보를 영구히 바꾸려면 `/etc/network/interfaces` 직접 편집)
 - reboot 해야 적용된다.

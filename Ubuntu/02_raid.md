@@ -13,24 +13,24 @@
 - 파티션을 나누면 : `/dev/sdb1` & `/dev/sdb2` ~
 - 추가 하드디스크를 사용하려면 최소 1개 이상의 파티션으로 나누고 특정 디렉터리에 마운트해야한다.
 ```shell
-# 1. 하드 디스크 장착
-# vm의 경우 store virtual disk as a single file & 알아보기 쉽게 scsi0-1.vmdk같이 hdd 생성
+##1. 하드 디스크 장착
+##vm의 경우 store virtual disk as a single file & 알아보기 쉽게 scsi0-1.vmdk같이 hdd 생성
 
-# 2. 파티션 나누기
-fdisk /dev/sdb
-# n -> p -> 1 -> enter -> enter -> p -> w
-# 파티션을 2개로 나누고자 할땐, 예를 들어 3G 하드롤 2G&1G로 나누고자 할 땐, 첫번째 파티션을 만들땐 Last sector 부분에 +2G 입력
+##2. 파티션 나누기
+# fdisk /dev/sdb
+##n -> p -> 1 -> enter -> enter -> p -> w
+##파티션을 2개로 나누고자 할땐, 예를 들어 3G 하드롤 2G&1G로 나누고자 할 땐, 첫번째 파티션을 만들땐 Last sector 부분에 +2G 입력
 
-# 3. 해당 파티션 파일 시스템 생성
-mkfs.ex4 /dev/sdb1
+##3. 해당 파티션 파일 시스템 생성
+# mkfs.ex4 /dev/sdb1
 
-# 4. 마운트
-mkdir /mydata
-mount /dev/sdbv1 /mydata
+##4. 마운트
+# mkdir /mydata
+# mount /dev/sdbv1 /mydata
 
-# 5. 항상 마운트되어 있도록 설정
-# /etc/fstab 제일 밑에 추가
-# /dev/sdb1 /mydata ext4 defaults 0 0
+##5. 항상 마운트되어 있도록 설정
+##/etc/fstab 제일 밑에 추가
+##/dev/sdb1 /mydata ext4 defaults 0 0
 ```
 
 ## RAID : 여러 개의 하드디스크를 하나의 하드디스크처럼 사용하는 방식
@@ -77,29 +77,29 @@ mount /dev/sdbv1 /mydata
 ### RAID 구축
 > 부팅후 df명령 : 마운트된 raid장치 찾기
 ```shell
-# 1. 파티션 상태 확인
-fdisk -l /dev/sdb ; fdisk -l /dev/sdc
-# 2. raid 생성
-mdadm --create /dev/md9 --level=linear --raid-devices=2 /dev/sdb1 /dev/sdc1
-# 3. raid 확인
-mdadm --detail --scan
-# 4. 파일 시스템 생성
-mkfs.ex4 /dev/md9
-# 5. 마운트할 디렉터리 생성
-mkdir /raidLinear
-# 6. 마운트
-mount /dev/md9 /raidLinear
-# 7. 항상 마운트되어 있게 설정
-vim /etc/fstab
+##1. 파티션 상태 확인
+# fdisk -l /dev/sdb ; fdisk -l /dev/sdc
+##2. raid 생성
+# mdadm --create /dev/md9 --level=linear --raid-devices=2 /dev/sdb1 /dev/sdc1
+##3. raid 확인
+# mdadm --detail --scan
+##4. 파일 시스템 생성
+# mkfs.ex4 /dev/md9
+##5. 마운트할 디렉터리 생성
+# mkdir /raidLinear
+##6. 마운트
+# mount /dev/md9 /raidLinear
+##7. 항상 마운트되어 있게 설정
+# vim /etc/fstab
 ##끝에 이것 추가 /dev/md9 /raidLinear ext4 defaults 0 0
-# 8. 확인
-mdadm --detail /dev/md9
-# 9. 버그 방지 설정
-mdadm --detail --scan >file.txt
-vim file.txt #복사 (yy)
-vim /etc/mdadm/mdadm.conf #맨 뒤에 붙여넣고 name=server:<숫자> 부분 지우기
-update-initramfs -u
-# 10. 스냅샷
+##8. 확인
+# mdadm --detail /dev/md9
+##9. 버그 방지 설정
+# mdadm --detail --scan >file.txt
+# vim file.txt #복사 (yy)
+# vim /etc/mdadm/mdadm.conf #맨 뒤에 붙여넣고 name=server:<숫자> 부분 지우기
+# update-initramfs -u
+##10. 스냅샷
 ```
 
 ### RAID 문제 발생 조치 방법

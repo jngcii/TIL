@@ -18,8 +18,8 @@
    ```
 5. 유저 추가
    ```shell
-   adduser --home /userHome/john john
-   adduser --home /userHome/bann bann
+   # adduser --home /userHome/john john
+   # adduser --home /userHome/bann bann
    ```
 6. /etc/fstab 편집
    ```sh
@@ -27,25 +27,25 @@
    ```
 7. 리마운트 (재부팅효과 적용됨)
    ```shell
-   mount --options remount /userHome
+   # mount --options remount /userHome
    ```
 8. quota 설치
    ```shell
-   apt-get -y install quota
+   # apt-get -y install quota
    ```
 9. 쿼터 DB 생성
     ```shell
-    cd /userHome
-    quotaoff -avug
-    quotacheck -augmn
-    rm -f aquota.*
-    quotacheck -augmn
-    touch aquota.user aquota.group
-    chmod 600 aquota.*
-    quotacheck -augmn
-    quotaon -avug
+    # cd /userHome
+    # quotaoff -avug
+    # quotacheck -augmn
+    # rm -f aquota.*
+    # quotacheck -augmn
+    # touch aquota.user aquota.group
+    # chmod 600 aquota.*
+    # quotacheck -augmn
+    # quotaon -avug
     ```
 10. 사용자별 공간 할당
     ```shell
-    edquota -u john
+    # edquota -u john
     ```
