@@ -57,6 +57,16 @@
   - [Practice](Algorithm/Advanced/DP)
 
 
+
+<br />
+
+## JavaScript
+
+### YOU DON'T KNOW JS
+
+- [타입 (Type)](JS/01_type.md)
+- [값 (Value)](JS/02_value.md)
+
 <br />
 
 ## Web
