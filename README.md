@@ -117,6 +117,9 @@
 - [Quota](Ubuntu/03_quota.md)
 - [Shell Script Programming](Ubuntu/04_shell_scripting.md)
 - [Remote System Management](Ubuntu/05_remote_system_management.md)
+- [Name Server](Ubuntu/06_name_server.md)
+- [Mail Server](Ubuntu/07_mail_server.md)
+- [Database Server](Ubuntu/08_database_server.md)
 
 ### Linux
 
