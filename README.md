@@ -40,6 +40,11 @@
 
 - [타입 (Type)](JS/01_type.md)
 - [값 (Value)](JS/02_value.md)
+- [네이티브 (Native)](JS/03_native.md)
+- [강제 변환](JS/04_type_coersion.md)
+- [문법](JS/05_Grammar.md)
+- [스코프 (Scope)](JS/06_Scope.md)
+- [렉시컬 스코프 (Lexical Scope)](JS/07_Lexical_Scope.md)
 
 
 
