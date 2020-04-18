@@ -47,6 +47,7 @@
 - [렉시컬 스코프 (Lexical Scope)](JS/07_Lexical_Scope.md)
 - [함수스코프 vs 블록스코프](JS/08_Scopes.md)
 - [호이스팅 (Hoisting)](JS/09_Hoisting.md)
+- [클로저 (Closure)](JS/10_Closure.md)
 
 
 
