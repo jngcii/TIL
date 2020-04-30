@@ -49,6 +49,7 @@
 - [호이스팅 (Hoisting)](JS/09_Hoisting.md)
 - [클로저 (Closure)](JS/10_Closure.md)
 - [this](JS/11_this.md)
+- [객체 (Object)](JS/12.object.md)
 
 
 <br />
