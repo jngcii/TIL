@@ -54,3 +54,64 @@ myObject.foo = "bar";
   ```
   - 겉보기엔 `myObject.a++`이 `anotherObject.a` 프로퍼티를 찾아 1만큼 증가시킬 것 같지만 `++` 연산자는 결국 `myObject.a = myObject.a + 1`을 의미해 의도와 다른 결과를 만들어낸다.
   - `anotherObject.a`를 1만큼 증가시킬 의도라면 `anotherObject.a++`이 유일한 정답이다.
+
+
+## II. 클래스
+
+> 자바스크립트는 여타 클래스 지향 언어에서 제공하는 클래스라는 추상화된 패턴이나 설계가 전혀 없고, 다만 객체만 있을 뿐이다.
+
+### 1. 클래스 함수
+- **자바스크립트의 모든 함수는 기본적으로 프로토타입이라는 공용 & 열거불가 프로퍼티를 가진다.**
+  ```js
+  function Foo() {
+    // ...
+  }
+  // 위와 같은 함수를 만들면 엔진은 함수의 내부에 Object.prototype을 프로토타입 링크하는 Foo.prototype이라는 객체 프로퍼티를 생성한다.
+
+  var a = new Foo();
+  Object.getPrototypeOf(a) === Foo.prototype; // true
+  ```
+  - 이 객체를 보통 `Foo`의 프로토타입이라고 하는데, `Foo.prototype`이라고 명명된 프로퍼티 레퍼런스를 통해 접근하기에 그렇게 부른다.
+  - `new Foo()`로써 만들어진 모든 객체는 결국 `Foo.prototype` 객체와 `[[Prototype]]` 링크로 연결된다.
+- 클래스 지향 (상속) vs 프로토타입 (위임)
+  |클래스 지향 | 프로토타입 |
+  |---|---|
+  |상속 | 위임 |
+  |한 클래스를 다중 복사(인스턴스화)할 수 있다. | 자바스크립트는 이러한 복사 과정이 전혀 없고 클래스에서 여러 인스턴스를 생성할 수도 없다. |
+  |클래스 인스턴스화 자체가 *클래스 작동 계획을 실제 객체로 복사하는 것*이므로 인스턴스마다 복사가 일어난다. | 어떤 공용 객체에 `[[Prototype]]`으로 연결된 객체를 다수 생성하는 건 가능하지만 기본적으로 어떠한 복사도 일어나지 않아서 결과적으로 **자바스크립트에서 객체들은 서로 완전히 떨어져 분리되는 것이 아니라 끈끈하게 연결된다.**|
+  |상속은 기본적으로 복사를 수반 | 두 객체에 링크를 걸어두고 한쪽이 다른 쪽의 프로퍼티/함수에 접근할 수 있도록 위임한다.|
+
+### 2. 생성자
+```js
+function Foo() {
+  // ...
+}
+
+Foo.prototype.constructor === Foo;  // true
+
+var a = new Foo();
+a.constructor === Foo;  // true
+```
+- `Foo` 함수는 생성자가 아닌 그냥 보통 함수일 뿐이고, `new` 키워드를 통해 호출했을 때 생성자로서의 역할을 한다.
+- `Foo.prototype`객체에는 기본적으로 열거 불가능한 공용 프로퍼티 `.constructor`가 세팅되는데, 이는 객체 생성과 관련된 함수(`Foo`)를 다시 참조하기 위한 레퍼런스다.
+- 마찬가지로 `new Foo()`로 생성한 객체 `a`도 `.constructor` 프로퍼티를 갖고 있어서 **자신을 생성한 함수를 가리킬 수 있다.**
+- 하지만!!!!!!
+  - `a.constructor === Foo`가 `true`임은 `a`에 `Foo`를 참조하는 `.constructor`라는 프로퍼티가 실재함을 의미할까???
+  - 아니다.
+  - 헷갈리게 보일 뿐 실은 `.constructor` 역시 `Foo.prototype`에 위임된 레퍼런스로서 `a.constructor`는 `Foo`를 가리킨다.
+  - 즉, `.constructor` 프로퍼티는 '*~에 의해 생성됨*'이란 의미를 갖는게 아니다!
+  ![](assets/constructor.jpg)
+- `Foo.prototype`의 `.constructor` 프로퍼티는 기본적으로 선언된 `Foo` 함수에 의해 생성된 객체에만 존재한다. 즉, 아래와 같을 경우에는 존재하지 않는다.
+  ```js
+  function Foo() { /* ... */ }
+  Foo.prototype = { /* ... */ }
+
+  var a1 = new Foo();
+  a1.constructor === Foo;     // false
+  a1.constructor === Object;  // true
+  ```
+  > `a1`에서 constructor를 찾았는데 없어서 Foo.prototype에서 찾고, 그 객체는 Object.prototype을 가리키고 있으므로 Object.prototype.constructor를 찾는다.
+- 그렇다고 `Object.defineProperty(Foo.prototype, "constructor", { enumerable: false, /* ... */ })`와 같이 손수 삽입하는 일은 정말 하면 안되는 짓이다.
+- `.constructor`는 열거불가지만 값은 쓰기가 가능하며, [[Prototype]] 연쇄에 존재하는 `constructor`라는 이름의 프로퍼티를 추가하거나 다른 값으로 덮어쓰는 것도 가능하다.
+- ***즉!!! `.constructor`와 같은 코드는 매우 불안정하고 신뢰할 수 없는 레퍼런스이므로, 될 수 있는 대로 코드에서 직접 사용하지 않는 게 좋다.***
+
