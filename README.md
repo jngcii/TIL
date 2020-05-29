@@ -51,7 +51,7 @@
 - [this](JS/11_this.md)
 - [객체 (Object)](JS/12.object.md)
 - [클래스와 객체의 혼합](JS/13_class_and_object.md)
-- [프토토타입 (Prototype)](JS/14_prototype.md)
+- [프로토타입 (Prototype)](JS/14_prototype.md)
 
 
 <br />
