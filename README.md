@@ -6,7 +6,7 @@
 
 ### Java 언어
 
-- [Java 개발환경 구축](./Java/JAVA%20%EC%86%8C%EA%B0%9C%20%EB%B0%8F%20%EA%B0%9C%EB%B0%9C%20%ED%99%98%EA%B2%BD%20%EA%B5%AC%EC%B6%95.m)
+- [Java 개발환경 구축](./Java/JAVA%20%EC%86%8C%EA%B0%9C%20%EB%B0%8F%20%EA%B0%9C%EB%B0%9C%20%ED%99%98%EA%B2%BD%20%EA%B5%AC%EC%B6%95.md)
 - [데이터활용](./Java/데이터%20활용.md)
 - [제어문](./Java/제어문.md)
 - [배열](./Java/배열.md)
