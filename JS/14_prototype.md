@@ -115,3 +115,55 @@ a.constructor === Foo;  // true
 - `.constructor`는 열거불가지만 값은 쓰기가 가능하며, [[Prototype]] 연쇄에 존재하는 `constructor`라는 이름의 프로퍼티를 추가하거나 다른 값으로 덮어쓰는 것도 가능하다.
 - ***즉!!! `.constructor`와 같은 코드는 매우 불안정하고 신뢰할 수 없는 레퍼런스이므로, 될 수 있는 대로 코드에서 직접 사용하지 않는 게 좋다.***
 
+## III. 프로토타입 상속
+```js
+function Foo(name) {
+  this.name = name;
+}
+
+Foo.prototype.myName = function() {
+  return this.name;
+};
+
+function Bar(name, label) {
+  Foo.call(this, name);
+  this.label = label;
+}
+
+// Bar.prototype을 Foo.prototype에 연결한다.
+Bar.prototype = Object.create(Foo.prototype);
+
+// 여기서 조심! 이제 Bar.prototype.constructor는 사라졌으니까
+// 이 프로퍼티에 의존하는 코드가 있다면 수동으로 일일이 해결해야한다.
+Bar.prototype.myLabel = function() {
+  return this.label;
+};
+
+var a = new Bar("a", "obj a");
+
+a.myName();     // "a"
+a.myLabel();    // "obj a"
+```
+- `Object.create()`를 실행하면 난데없이 새로운 객체를 만들고 내부 `[[Prototype]]`을 인자로 받는 객체에 연결한다.
+- `Bar() { }` 함수를 선언하면 `Bar`는 여타 함수처럼 기본으로 `Bar.prototype` 링크를 자신의 객체에 가지고 있다.
+- 이 객체를 `Foo.prototype`과 연결하고 싶은데, 현재 그렇게 연결되어 있지는 않다. 따라서 애초 연결된 객체와 헤어지고 `Foo.prototype`과 연결된 새로운 객체를 생성해 배당한 것이다.
+
+### 1. 상속하는 방법
+- `Object.create()`를 사용해서 새로운 객체를 적절히 링크하는 방법 (주어진 기존 객체 자신을 수정하는 게 아니라 아예 내던지고 새로운 객체를 만들어 써야 한다는 단점이 있다.)
+- `.__proto__` 프로퍼티를 거친 비표준적/비호환 방법
+- ES6 이후의 `Object.setPrototypeOf()` 유틸리티
+  ```js
+  // ES6 이전
+  // 기존 기본 'Bar.prototype'를 던져 버린다.
+  Bar.prototype = Object.create(Foo.prototype);
+
+  // ES6 이후
+  // 기존 'Bar.prototype`을 수정한다.
+  Object.setPrototypeOf(Bar.prototype, Foo.prototype);
+  ```
+
+### 2. 클래스 관계 조사
+```js
+b.isPrototypeOf(c);
+```
+- `c`의 전체 `[[Prototype]]` 연쇄 어딘가 b가 존재하는가?
