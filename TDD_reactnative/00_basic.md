@@ -16,7 +16,7 @@
 2. Make it fail
   - test code만 작성하고 실제로 개발을 진행하지 않는 단계
   - test code를 돌리면 당연히 실패가 나온다.
-3. Make if green
+3. Make it green
   - test code에 기반해 (정상적으로 실행되도록) 실제로 개발을 진행하는 단계
 4. Refactoring
   - 개발 전반에 필요한 단계
