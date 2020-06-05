@@ -23,7 +23,9 @@
   - `tests/App-test.js`를 `tests/App.spec.js`로 변경
   - `/src` 디렉터리 만들고 그 안에 `App.js` 넣기
   - `index.js` 에서 `App.js` 경로 변경
+  ![](assets/qna.png)
 
+  
 ## II. 사용할 라이브러리
 
 ### 1) Jest
