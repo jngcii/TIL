@@ -149,3 +149,67 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
     out.println("<h1>name="+name+"</h1>");
 }
 ```
+
+### 3) 세션 예제 (로그인)
+
+#### `login.jsp`
+```jsp
+<form action="sessionLogin" method="post">
+    아이디 : <input type="text" name="id" />
+    비밀번호 : <input type="password" name="passwd" />
+    <br />
+    <input type="submit" value="로그인" />
+</form>
+```
+
+#### `menu.jsp`
+```jsp
+<%
+    String id = (String)session.getAttribute("id");
+%>
+<body>
+<%
+    if(id == null) {
+%>
+<a href="login.jsp">로그인</a>
+<%
+    }
+    else {
+%>
+<%=id %> 님 환영합니다.
+<%
+    }
+%>
+</body>
+```
+
+#### `SessionLoginServlet.java`
+```java
+protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    // TODO Auto-generated method stub
+    rquest.setCharacterEncoding("euc-kr");
+    response.setContentType("text/html;charset=euc-kr");
+    PrintWriter out = response.getWriter();
+    String id = request.getParameter("id");
+    String passwd = request.getParameter("passwd");
+    if (id.equal("java")&&passwd.equals("java")) {
+        HttpSession session = request.getSession();
+        session.setAttribute("id", id);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("menu.jsp");
+        dispatch.forward(request, response);
+    } else {
+        out.println("<script>");
+        out.println("alert('아이디나 비밀번호가 일치하지 않습니다.')");
+        out.println("history.back()");
+        out.println("</script>");
+    }
+}
+```
+> RequsetDispatcher 인터페이스는 특정 페이지로 포워딩하는 기능이 정의되어 있다. 생성할 때 파라미터 값으로 포워딩 될 URL이 온다.
+
+
+### 서블릿에서 특정 페이지로 포워딩하는 두 가지 방법
+
+- Dispatcher 방식 : 이 방식으로 포워딩하게 되면 주소 표시줄의 주소가 변경되지 않는다. 즉, 하나의 요청이라는 의미이다. 따라서, 같은 request 영역을 공유하게 된다.
+
+- Redirect 방식 : 포워딩될 때 브라우저의 주소 표시줄 URL이 변경되므로 요청이 바뀌게 된다. 따라서 포워딩된 jsp 페이지는 서블릿에서 request 영역에 공유한 속성에 접근할 수 없다.
