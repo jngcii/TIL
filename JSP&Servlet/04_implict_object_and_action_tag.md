@@ -45,3 +45,33 @@
   |String | getProtocol() | 요청에 사용된 프로토콜 이름을 문자열로 리턴한다. |
   |String | getMethod() | 요청에 사용된 요청 방식을 문자열로 리턴한다. |
   |String | getContextPath() | 해당 JSP 페이지의 컨텍스트 경로를 문자열로 리턴한다. |
+
+### 2) response 객체
+- 클라이언트의 요청에 대한 HTTP 응답을 나타내는 객체
+- 웹컨테이너에서는 javax.servlet.http.HttpServletResponse 인터페이스를 사용해 response 객체를 생성한다.
+- response 객체의 주요 메서드
+  | 리턴 타입 | 메서드명 | 설명 |
+  | --- | --- | --- |
+  |없음 | setHeader(String headerName, String headerValue) | 응답에 포함될 헤더 정보에 headerName의 이름으로 headerValue 값을 설정해 추가한다. |
+  |없음 | addCookie(Cookie cookie) | javax.servlet.http.Cookie 타입의 쿠기 객체를 응답 헤더에 추가한다. 쿠키에 대해서는 Chapter 8에서 자세히 다룬다. |
+  |없음 | sendRedirect(String url) | 지정된 URL로 요청을 재전송한다. |
+  |없음 | setContentType(String type) | 응답 페이지의 contentType을 설정한다. |
+
+### 3) pageContext 객체
+- JSP 페이지와 관련된 프고르램에서 다른 내장 객체를 얻어내거나 현재 페이지의 요청과 응답의 제어권을 다른 페이지로 넘겨주는데 사용한다.
+- 내장 속성을 제어하는 기능을 한다.
+  | 리턴 타입 | 메서드명 | 설명 |
+  | --- | --- | --- |
+  |ServletRequest|getRequest()|클라이언트의 요청 정보를 담고 있는 객체를 리턴한다. |
+  |ServletResponse | getResponse()| 요청에 대한 응답 객체를 리턴한다. |
+  |JspWriter | getOut() | 응답 출력 스트림을 리턴한다. |
+  |Object | getPage() | 서블릿 인스턴스 객체를 리턴한다. |
+  |ServletConfig | getServletConfig() | 서블릿 초기 설정 정보를 담고 있는 객체를 리턴한다. | 
+
+### 4) 기타 객체
+- session 객체
+- application 객체
+- out 객체
+- config 객체
+- page 객체
+- exception 객체
