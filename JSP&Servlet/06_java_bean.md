@@ -116,3 +116,102 @@
 - 세션 영역은 요청이 바뀌어도 정보가 유지되어야 하는 경우, 즉 로그인이나 장바구니 등에 많이 사용된다.
 - 애플리케이션 영역은 애플리케이션 전체 영역에서 데이터를 공유해야 하는 경우 (전체 방문자 수 계산) 등에 많이 사용한다.
 - 개발하고 있는 프로그램의 기능을 고려하여 적절한 영역을 사용해야 메모리의 낭비를 줄일 수 있다.
+
+## III. 자바빈을 이용한 회원 가입 폼 작성
+
+### 1) 자바빈 작성
+> 회원가입할 때 입력했던 내용을 멤버 변수에 저장
+- `JoinBean.java`
+  ```java
+  package join;
+
+  public class JoinBean {
+    private String id;
+    private String password;
+    private String name;
+
+    public String getId() {
+      return id;
+    }
+
+    public void setId(String id) {
+      this.id = id;
+    }
+
+    public String getPassword() {
+      return password;
+    }
+
+    public void setPassword(String password) {
+      this.password = password;
+    }
+
+    public String getName() {
+      return name;
+    }
+
+    public void setName(String name) {
+      this.name = name;
+    }
+  }
+  ```
+
+### 2) 입력폼 페이지 작성
+- `joinForm.jsp`
+  ```html
+  <%@ page language="java" contentType="text/html; charset=UTF-8" %>
+  <html>
+  <head>
+  <title>회원가입 폼</title>
+  </head>
+  <body>
+  <h1>회원정보 입력</h1>
+  <form action="joinChk.jsp" method="post">
+    
+    <label for="id">아이디 : </label>
+    <input type="text" name="id" id="id">
+  
+    <label for="password">비밀번호 : </label>
+    <input type="password" name="password" id="password">
+  
+    <label for="name">이름 : </label>
+    <input type="text" name="name" id="name">
+
+    <input type="submit" value="가입">
+  </form>
+  </body>
+  </html>
+  ```
+
+### 3) 입력 정보 확인 페이지 작성
+> `<jsp:setProperty/>`로 자바빈 객체 저장, `<jsp:getProperty>`로 표시
+- `joinChk.jsp`
+  ```html
+  <%@ page language="java" contentType="text/html; charset=UTF-8" %>
+  <%request.setCharacterEncoding("UTF-8"); %>
+  <jsp:useBean id="join" class="join.JoinBean" />
+  <jsp:setProperty id="join" property="*" />
+
+  <html>
+  <head>
+  <title>회원 가입 입력 정보 확인 페이지</title>
+  </head>
+
+  <body>
+    <div>
+      <span>아이디 : </span>
+      <span><jsp:getProperty name="join" property="id" /></span>
+    </div>
+
+    <div>
+      <span>비밀번호 : </span>
+      <span><jsp:getProperty name="join" property="password" /></span>
+    </div>
+
+    <div>
+      <span>이름 : </span>
+      <span><jsp:getProperty name="join" property="name" /></span>
+    </div>
+  </body>
+  </html>
+  ```
