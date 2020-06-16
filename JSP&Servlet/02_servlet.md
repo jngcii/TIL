@@ -153,7 +153,7 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 ### 3) 세션 예제 (로그인)
 
 #### `login.jsp`
-```jsp
+```html
 <form action="sessionLogin" method="post">
     아이디 : <input type="text" name="id" />
     비밀번호 : <input type="password" name="passwd" />
@@ -163,7 +163,7 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 ```
 
 #### `menu.jsp`
-```jsp
+```html
 <%
     String id = (String)session.getAttribute("id");
 %>
