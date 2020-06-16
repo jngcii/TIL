@@ -75,3 +75,188 @@
 - config 객체
 - page 객체
 - exception 객체
+
+
+## II. 영역 객체와 속성
+
+### 1) Scope(영역객체)와 Attribute(속성)
+- JSP에서 제공하는 내장 객체들 중 session, request, application 객체들은 해당 객체에 정의된 유효 범위 안에서 필요한 객체들을 저장하고 읽어들임으로써 서로 공유할 수 있는 특정한 영역을 가지고 있다.
+- Attribute : 공유되는 데이터
+- Scope : 속성을 공유할 수 있는 유효 범위
+- session 내장 객체는 세션이 유지되고 있는 범위 안에서 서로 다른 페이지라 할지라도 객체들을 공유할 수 있는 속성을 가질 수 있고 이 속성에 저장된 객체는 세션이 종료되는 순간에 반환된다(버려진다).
+- request 객체는 클라이언트의 요청이 처리되는 동안에 속성을 사용할 수 있다.
+- application 객체는 해당 웹 애플리케이션이 실행되는 동안 속성을 사용할 수 있다.
+- 예외 : page 영역 객체는 오직 하나의 페이지 내에서만 유효성을 갖는 영역으로 주의해야 할 점은 page 내장 객체가 아닌 pageContext 내장 객체를 통해 접근할수 있는 영역이라는 점이다.
+
+### 2) 속성과 관련된 메서드들
+|리턴 타입 | 메서드명 | 해설 |
+|--- | --- | --- |
+|Object | getAttribute(String key) | key 값으로 등록되어 있는 속성을 Object 타입으로 리턴 |
+|Enumeration |getAttributeNames | 해당 영역에 등록되어 있는 모든 속성들의 이름을 Enumeration 타입으로 리턴 |
+|없음 | setAttribute(String key, Object obj) | 해당 영역에 key 값의 이름으로 obj 객체를 등록 |
+|없음 |removeAttribute(String key) | key 값으로 등록되어 있는 속성을 제거 |
+
+#### 예시
+- `attributeTest1_Form.jsp`
+  ```html
+  <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+  <html>
+  <head>
+  <title>Attribute Test Form</title>
+  </head>
+
+  <body>
+  <h2>영역과 속성 테스트</h2>
+  <form action="attributeText1.jsp" method="post">
+    <table border="1">
+      <tr><td colspan="2">Application 영역에 저장할 내용들</td></tr>
+      <tr>
+        <td>이름</td>
+        <td><input type="text" name="name"></td>
+      </tr>
+      <tr>
+        <td>아이디</td>
+        <td><input type="text" name="id"></td>
+      </tr>
+      <tr>
+        <td colspan="2"><input type="submit" value="전송"></td>
+      </tr>
+    </table>
+  </form>
+  </body>
+  </html>
+  ```
+- `attributeTest1.jsp`
+  ```html
+  <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+  <html>
+  <head>
+  <title>Attribute Test</title>
+  </head>
+
+  <body>
+  <h2>영역과 속성 테스트</h2>
+  <%
+  request.setCharacterEncoding("UTF-8");
+  String name=request.getParameter("name");
+  String id=request.getParameter("id");
+  if(name!=null&&id!=null) {
+    application.setAttribute("name", name);
+    application.setAttribute("id", id);
+  }
+  %>
+  <h3><%=name %>님 반갑습니다.</br><%=name %>님의 아이디는 <%=id %>입니다.</h3>
+  <form action="attributeTest2.jsp" method="post">
+  <table border="1">
+    <tr><td colspan="2">Session 영역에 저장할 내용들</td></tr>
+    <tr>
+      <td>e-mail 주소</td>
+      <td><input type="text" name="email"></td>
+    </tr>
+    <tr>
+      <td>집 주소</td>
+      <td><input type="text" name="address"></td>
+    </tr>
+    <tr>
+      <td>전화번호</td>
+      <td><input type="text" name="tel"></td>
+    </tr>
+    <tr>
+      <td colspan="2"><input type="submit" value="전송"></td>
+    </tr>
+  </table>
+  </form>
+  </body>
+  </html>
+  ```
+  > `application.setAttribute()` : 이름과 아이디 값을 애플리케이션 영역에 속성으로 공유하는 부분
+
+- `attributeTest2.jsp`
+  ```html
+  <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+  <html>
+  <head>
+  <title>Attribute Test</title>
+  </head>
+
+  <body>
+  <h2>영역과 속성 테스트</h2>
+  <%
+  request.setCharacterEncoding("UTF-8");
+  String email = request.getParameter("email");
+  String address = request.getParameter("address");
+  String tel = request.getParameter("tel");
+  session.setAttribute("email", email);
+  session.setAttribute("address", address);
+  session.setAttribute("tel", tel);
+
+  String name=(String)application.getAttribute("name");
+  %>
+  <h3><%=name %>님의 정보가 모두 저장되었습니다.</h3>
+  </body>
+  </html>
+  ```
+  > `session.setAttribute()` : email, address, tel 값을 session 영역에 속성으로 공유한다.
+
+
+## III. 액션 태그
+- JSP 페이지에서 자바 코드 등의 스크립트 언어를 사용하지 않고도 다른 페이지의 서블릿이나 자바빈의 객체에 접근할 수 있도록 태그를 이용해 구현된 기능
+- 기능
+  - 페이지의 흐름을 제어
+  - 자바빈의 속성 읽고 쓰기
+  - 애플릿을 사용
+- 액션태그 종류
+  - 페이지 흐름 제어 액션 (forward/include 액션)
+  - 자바빈 사용 액션 (useBean 액션)
+  - 애플릿 사용 액션 (plugin 액션) ; 사용빈도가 현저히 줄어든 추세
+
+### 1) forward 액션
+```html
+<jsp:forward page="이동할 페이지" />
+```
+- 액션 태그는 XML 문법을 이용하여 구현된 기능이므로 위에서 보여지듯이 태그의 끝에 종료 태그가 반드시 있어야 한다.
+- 내장 객체 중 pageContext 객체의 forward() 메서드가 태그로 구현된 기능
+- 따라서 forward 액션은 현재 페이지의 요청과 응답에 관한 처리권을 page 속성에 지정된 이동할 페이지로 영구적으로 넘기는 기능을 한다.
+- 이 때 이동하기 전의 페이지에 대한 모든 출력 버퍼의 내용은 무시(버퍼의 내용이 버려짐)되며 이동한 페이지가 요청을 처리하여 응답이 완료되면 원래 페이지로 제어권이 돌아가지 않고 그 상태에서 모든 응답이 종료된다.
+- 아래와 같이 변수를 사용할 수 도 있다.
+  ```html
+  <jsp:forward page='<%=nextPage %>' />
+  ```
+- forward 태그를 사용하여 이동할 페이지에 추가적으로 파라미터를 넘겨줄 필요가 있을 때에는 다음처럼 forward 태그의 하위 태그인 `<jsp:param />` 태그를 사용할 수 있다.
+  ```html
+  <jsp:forward page="이동할 페이지">
+    <jsp:param name="파라미트 이름1" value="파라미터 값1" />
+    <jsp:param name="파라미트 이름2" value="파라미터 값2" />
+  </jsp:forward>
+  ```
+- 혹은 query parameter러 전송할 수 도 있다.
+  ```html
+  <jsp:forward page="forward.jsp?id=jngcii&password=abc" />
+  ```
+
+### 2) include 액션
+```html
+<jsp:include page="포함될 페이지" flush="false" />
+```
+- include 액션은 임시로 제어권을 include되는 페이지로 넘겼다가 그 페이지의 처리가 끝나면 처리 결과를 원래 페이지로 되돌리고 다시 원래의 페이지로 제어권을 반환하는 방식이다.
+- include 지시어의 경우네는 컨테이너의 버전에 따라서 원래 페이지의 서블릿이 생성된 이후에 include되는 페이지가 변동되었을 경우 그 변동을 원래 페이지가 반영하지 못하는 경우도 있다. 따라서 include 지시어는 일반적으로 정적인 코드를 포함시킬 때 주로 사용하고 include 액션은 JSP 페이지처럼 동적인 페이지를 포함시키고자 할 때 주로 사용된다.
+
+### 3) XMLElement를 생성하는 액션 태그들
+- jsp에서 제공하는 XML 엘리먼트 관련 액션 태그들은 jsp 내에 XML 관련 엘리먼트들을 동적으로 생성하는 역할을 한다.
+- `<jsp:element>`
+  ```html
+  <jsp:element name="elementName"></jsp:element>
+  ```
+  > xml 엘리먼트를 정의하는 액션 테그
+- `<jsp:attribute>`
+  ```html
+  <jsp:attribute name="attributeName">
+  attributeValue
+  </jsp:attribute>
+  ```
+  > 엘리먼트의 속성을 정의하는 액션 태그
+- `<jsp:body>`
+  ```html
+  <jsp:body>XML 엘리먼트의 내용</jsp:body>
+  ```
+  > 엘리먼트의 내용을 지정
