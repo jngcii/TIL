@@ -8,7 +8,7 @@
   - 응용프로그램과 데이터베이스 사이에서 데이터가 올바르게 정보 교환을 할 수 있도록 관리해주는 시스템
   - 테이블 등을 설계하고 생성하는 **정의 기능**, 데이터를 삽입, 수정, 삭제, 검색 등 조작하는 **조작 기능**, 저장된 데이터가 일관성을 유지하고 데이터의 중복 문제를 발생하지 않도록 하는 **제어 기능**
 
-### MySQL 설치
+### 1) MySQL 설치
 1. `http://www.mysql.com/` 접속
 2. 제일 아래 DOWNLOADS - MySQL Community Server 클릭
 3. 사용중인 운영체제 선택 후 Go To Download Page
@@ -30,6 +30,17 @@
 19. 완료
 20. 환경변수 설정 (시스템 변수에 `C:\Program Files\MySQL\MySQL Server 8.0\bin;` 추가)
 21. `mysql -u root -p`로 확인
+
+### 2) Oracle
+> 11g를 가장 흔히 사용한다.
+1. `http://www.oracle.com` 접속
+2. 햄버거 - 제품 도움말 - Download - 데이터베이스 - Database 11g Enterprise/Standard Editions
+3. 운영체제에 맞는 버전 다운로드 (파일 두개 모두 다운로드 후 같은 폴더에 압축 풀기)
+4. `setup.exe` 실행
+5. My Oracle Support를 통해 보안 갱신 수신 체크 해제
+6. 데이터베이스 생성 및 구성 체크하고 다음
+7. 데스크톱 클래스로 체크하고 다음
+8. 안내에 따라 설치
 
 
 ## II. SQL
