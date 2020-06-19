@@ -33,14 +33,9 @@
 
 ### 2) Oracle
 > 11g를 가장 흔히 사용한다.
-1. `http://www.oracle.com` 접속
-2. 햄버거 - 제품 도움말 - Download - 데이터베이스 - Database 11g Enterprise/Standard Editions
-3. 운영체제에 맞는 버전 다운로드 (파일 두개 모두 다운로드 후 같은 폴더에 압축 풀기)
-4. `setup.exe` 실행
-5. My Oracle Support를 통해 보안 갱신 수신 체크 해제
-6. 데이터베이스 생성 및 구성 체크하고 다음
-7. 데스크톱 클래스로 체크하고 다음
-8. 안내에 따라 설치
+1. `https://www.oracle.com/database/technologies/xe-prior-releases.html` 접속
+2. 안내대로 설치
+3. 중간에 HTTP port 8080 -> 8081 설치
 
 
 ## II. SQL
