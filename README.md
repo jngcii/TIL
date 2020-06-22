@@ -41,6 +41,8 @@
 - [데이터베이스](./JSP&Servlet/10_database.md)
 - [JDBC](./JSP&Servlet/11_jdbc.md)
 - [커넥션 풀](./JSP&Servlet/12_connection_pool.md)
+- [JDBC 실전 화룡](./JSP&Servlet/13_usage_of_jdbc.md)
+- [통합회원관리 시스템](.JSP&Servlet/14_account_management_system.md)
 
 
 
