@@ -107,13 +107,15 @@
 
 
 ## V. View 객체
-```xml
-<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-  <beans:property name="prefix" value="/WEB-INF/view/" />
-  <beans:property name="suffix" value=".jsp />
-</beans:bean>
-```
-- jsp 파일명 : `/WEB-INF/views/success.jsp`
+- 스프링 설정 파일(Bean객체 등록하는 파일)에 아래 Bean객체 등록
+  ```xml
+  <beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+    <beans:property name="prefix" value="/WEB-INF/view/" />
+    <beans:property name="suffix" value=".jsp />
+  </beans:bean>
+  ```
+  - jsp 파일명 : `/WEB-INF/views/success.jsp`
+  - 위 코드는 ViewResovler Bean 객체를 등록하는 코드이고 ViewResolver Bean 객체는 jsp파일을 설정해주는 것이다.
 
 ## VI. 전체적인 웹 프로그래밍 구조
 ![](assets/Screen%20Shot%202020-06-27%20at%204.10.31%20PM.png)
