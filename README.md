@@ -134,10 +134,6 @@
 
 ## Web
 
-### DRF
-- [프로젝트 시작](DRF/00_Starting_project.md)
-- [TDD & Registration](DRF/01_Token_registration.md)
-
 ### OAuth
 
 - [등록](OAuth/01_역할_및_등록.md)
