@@ -85,3 +85,83 @@
   ```
 
 ## II. java 파일 분리하기
+- `MemberConfig.java` 파일을 1, 2, 3으로 나눈다.
+- 하나의 Config에서 다른 Config파일의 메서드 참고하는 방법
+- `MemberConfig2.java`
+  ```java
+  @Configuration
+  public class MemberConfig2 {
+
+      @Bean
+      public DataBaseConnectionInfo dataBaseConnectionInfoDev() {
+          DataBaseConnectionInfo infoDev = new DataBaseConnectionInfo();
+          infoDev.setJdbcURL("jdbc:oracle:thin:@localhost:1521:xe");
+          infoDev.setUserId("jngcii");
+          infoDev.setUserPw("mypassword");
+      }
+
+      @Bean
+      public DataBaseConnectionInfo dataBaseConnectionInfoReal() {
+          DataBaseConnectionInfo infoReal = new DataBaseConnectionInfo();
+          infoDev.setJdbcURL("jdbc:oracle:thin:@192.168.0.1:1521:xe");
+          infoDev.setUserId("jngcii");
+          infoDev.setUserPw("mypassword");
+      }
+
+  }
+- `MemberConfig3.java`
+  ```java
+  @Configuration
+  public class MemberConfig3 {
+
+      @Autowired
+      DataBaseConnectionInfo dataBaseConnectionInfoDev;
+
+      @Autowired
+      DataBaseConnectionInfo dataBaseConnectionInfoReal;
+
+      @Bean
+      public EMSInformationService informationService() {
+
+          EMSInformationService info = new EMSInformationService();
+
+          // ...
+
+          Map<String, DataBaseConnectionInfo> dbInfos = new HashMap<String, DataBaseConnectionInfo>();
+          dbInfos.put("dev", dataBaseConnectionInfoDev);
+          dbInfos.put("real", dataBaseConnectionInfoReal);
+
+          return info;
+      }
+
+  }
+  ```
+- `Main.java`
+  ```java
+  //...
+
+  AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(MemberConfig1.class, MemberConfig2.class, MemberConfig3.class);
+
+  //...
+  ```
+
+## III. `@Import` 어노테이션
+> Config파일 1번에서 2번과 3번 import
+- `MemberConfig1.java`
+  ```java
+  @Configuration
+  @Import({MemberConfig2.class, MemberConfig3.class})
+  public class MemberConfig1 {
+
+      // ...
+
+  }
+  ```
+- `Main.java`
+  ```java
+  //...
+
+  AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(MemberConfig1.class);
+
+  //...
+  ```
