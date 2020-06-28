@@ -68,7 +68,7 @@
 - [DI](./Spring/03_DI.md)
 - [Lifecycle](./Spring/04_lifecycle.md)
 - [Annotation](./Spring/05_annotation.md)
-- [웹 프로그래밍 모델](./Spring/06_web_programming_model.md)
+- [Web Programming Model](./Spring/06_web_programming_model.md)
 - [Spring MVC](./Spring/07_spring_mvc.md)
 - [Service & Dao 객체 구현](./Spring/08_service_dao.md)
 - [Controller 구현](./Spring/09_controller.md)
