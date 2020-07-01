@@ -55,11 +55,11 @@
 ### Spring(Basic)
 
 - [프로젝트 세팅](./Spring_basic/00_prj_setting.md)
-- [IoC](./Spring_basic/01_ioc.md)
+- [IoC (Inversion of Control)](./Spring_basic/01_ioc.md)
 - [IoC Container](./Spring_basic/02_ioc_container.md)
-- [DI](./Spring_basic/03_di.md)
-- [AOP](./Spring_basic/04_aop.md)
-- [PSA](./Spring_basic/05_psa.md)
+- [DI (Dependency Injection](./Spring_basic/03_di.md)
+- [AOP (Aspect Oriented Programming)](./Spring_basic/04_aop.md)
+- [PSA (Portable Service Abstraction)](./Spring_basic/05_psa.md)
 
 ### Spring
 - [개요](./Spring/00_intro.md)
