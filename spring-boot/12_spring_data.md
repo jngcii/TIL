@@ -80,10 +80,134 @@
     > 이 값들은 HikariDataSource가 상속하고 있는 HikariConfig에서 온다. (여기에 다 설정되어 있다.)
 
 ### 2) MySQL
-- MySQL에 접속할 수 있는 커넥터 의존성 추가
+- MySQL에 접속할 수 있는 커넥터 (driver) 의존성 추가
     ```xml
     <dependency>
         <groupId>mysql</groupId>
         <artifactId>mysql-connector-java</artifactId>
     </dependency>
+    ```
+- docker를 통해 mysql 실행
+    ```bash
+    $ docker pull mysql
+    $ docker images
+    $ docker run -p 3306:3306 --name mysql_boot -e MYSQL_ROOT_PASSWORD=1 -e MYSQL_DATABASE=springboot -e MYSQL_USER=jngcii -e MYSQL_PASSWORD=7777 -d mysql
+    $ docker ps
+    ```
+- mysql 접속해보기
+    ```bash
+    $ docker exec -i -t mysql_boot bash
+
+    $ mysql -u jngcii -p 7777
+    ```
+    ```sql
+    show databases;
+    use springboot;
+    show tables;
+    ```
+- `application.properties`에 접속할 설정 추가
+    ```properties
+    spring.datasource.url=jdbc:mysql://localhost:3306/springboot
+    spring.datasource.username=jngcii
+    spring.datasource.password=7777
+    ```
+- `MysqlRunner.java`
+    ```java
+    @Component
+    public class MysqlRunner implements ApplicationRunner {
+
+        @Autowired
+        DataSource dataSource;
+
+        @Override
+        public void run(ApplicationArguments args) throws Exception {
+            try(Connection conn = dataSource.getConnection()) {
+                System.out.println(conn.getClass());
+                System.out.println(conn.getMetaData().getURL());
+                System.out.println(conn.getMetaData().getUserName());
+
+                Statement stmt = conn.createStatement();
+                String sql = "CREATE TABLE user (id INTEGER NOT NULL, name VARCHAR(255) NOT NULL, PRIMARY KEY(id));";
+                stmt.executeUpdate(sql);
+            }
+
+            jdbcTemplate.execute("INSERT INTO user VALUES (1, 'hyungsoo');");
+        }
+
+    }
+    ```
+- mysql 확인
+    ```bash
+    $ docker exec -i -t mysql_boot bash
+
+    $ mysql -u jngcii -p
+    ```
+    ```sql
+    show databases;
+    use springboot;
+    show tables;
+    select * from user;
+    ```
+
+
+## III. PostgresQL 설정하기
+- PSQL에 접속할 수 있는 커넥터 (driver) 의존성 추가
+    ```xml
+    <dependency>
+        <groupId>org.postgresql</groupId>
+        <artifactId>postgresql</artifactId>
+    </dependency>
+    ```
+    > mysql 커넥터 의존성과 같이 있으며 안된다. H2는 테스트로 사용할 수 있기 때문에 두는것이 좋다.
+- `application.properties`에 접속할 설정 추가
+    ```properties
+    spring.datasource.url=jdbc:postgresql://localhost:5432/springboot
+    spring.datasource.username=jngcii
+    spring.datasource.password=7777
+    ```
+- docker로 psql 실행
+    ```bash
+    $ docker pull postgres
+    $ docker images
+    $ docker run -p 5432:5432 -e POSTGRES_PASSWORD=7777 -e POSTGRES_USER=jngcii -e POSTGRES_DB=springboot --name postgres_boot -d postgres
+    $ docker ps
+    $ docker exec -i -t postgres_boot bash
+
+    $ ps ax | grep postgres
+    $ su - postgres
+    $ psql springboot
+    ```
+    ```postgres
+    ##### database 조회 #####
+    # \l    
+    # \list
+
+    ##### table 조회 #####
+    # \dt
+    
+    ```
+- `PsqlRunner.java`
+    ```java
+    @Component
+    public class PsqlRunner implements ApplicationRunner {
+
+        @Autowired
+        DataSource dataSource;
+
+        @Override
+        public void run(ApplicationArguments args) throws Exception {
+            try(Connection conn = dataSource.getConnection()) {
+                System.out.println(conn.getClass());
+                System.out.println(conn.getMetaData().getURL());
+                System.out.println(conn.getMetaData().getUserName());
+
+                Statement stmt = conn.createStatement();
+                String sql = "CREATE TABLE users (id INTEGER NOT NULL, name VARCHAR(255) NOT NULL, PRIMARY KEY(id));";
+                stmt.executeUpdate(sql);
+            }
+
+            jdbcTemplate.execute("INSERT INTO users VALUES (1, 'hyungsoo');");
+        }
+
+    }
     ```
