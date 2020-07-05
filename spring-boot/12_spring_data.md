@@ -119,6 +119,9 @@
         @Autowired
         DataSource dataSource;
 
+        @Autowired
+        JdbcTemplate jdbcTemplate;
+
         @Override
         public void run(ApplicationArguments args) throws Exception {
             try(Connection conn = dataSource.getConnection()) {
@@ -193,6 +196,9 @@
 
         @Autowired
         DataSource dataSource;
+
+        @Autowired
+        JdbcTemplate jdbcTemplate;
 
         @Override
         public void run(ApplicationArguments args) throws Exception {
